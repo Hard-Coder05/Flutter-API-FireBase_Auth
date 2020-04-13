@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lasttry/services/authentication.dart';
-import 'package:lasttry/pages/root_page.dart';
+import 'package:lasttry/pages/authenticate/root_page.dart';
 
 void main() {
   runApp(new MyApp());
@@ -9,7 +9,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
+
     return new MaterialApp(
         title: 'ImageAPI+Firebase Auth',
         debugShowCheckedModeBanner: false,

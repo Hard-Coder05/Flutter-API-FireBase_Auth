@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lasttry/pages/login_signup_page.dart';
+import 'package:lasttry/pages/authenticate/login_signup_page.dart';
 import 'package:lasttry/services/authentication.dart';
-import 'package:lasttry/pages/home_page.dart';
-
+import 'package:lasttry/pages/home/home_page.dart';
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
@@ -11,22 +10,18 @@ enum AuthStatus {
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
-
   final BaseAuth auth;
-
   @override
   State<StatefulWidget> createState() => new _RootPageState();
 }
-
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
-
   @override
   void initState() {
     super.initState();
     Future.delayed(
-      Duration(seconds: 3),
+      Duration(seconds: 5),
           (){
         widget.auth.getCurrentUser().then((user) {
           setState(() {
@@ -40,7 +35,6 @@ class _RootPageState extends State<RootPage> {
       },
     );
   }
-
   void loginCallback() {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
@@ -51,14 +45,12 @@ class _RootPageState extends State<RootPage> {
       authStatus = AuthStatus.LOGGED_IN;
     });
   }
-
   void logoutCallback() {
     setState(() {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });
   }
-
   Widget buildWaitingScreen() {
     return Scaffold(
       body: Stack(
@@ -106,7 +98,6 @@ class _RootPageState extends State<RootPage> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     switch (authStatus) {
