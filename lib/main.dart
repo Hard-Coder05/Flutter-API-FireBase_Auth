@@ -9,11 +9,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return new MaterialApp(
-        title: 'Flutter login demo',
+        title: 'ImageAPI+Firebase Auth',
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.lightBlue,
         ),
         home: new RootPage(auth: new Auth()));
   }

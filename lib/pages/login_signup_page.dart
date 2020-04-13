@@ -89,16 +89,20 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Flutter login demo'),
-        ),
-        body: Stack(
-          children: <Widget>[
-            _showForm(),
-            _showCircularProgress(),
-          ],
-        ));
+    return WillPopScope(
+        onWillPop: _onBackPressed,
+      child: new Scaffold(
+
+          appBar: new AppBar(
+            title: new Text('ImageAPI + FirebaseAuth'),
+          ),
+          body: Stack(
+            children: <Widget>[
+              _showForm(),
+              _showCircularProgress(),
+            ],
+          )),
+    );
   }
 
   Widget _showCircularProgress() {
@@ -176,17 +180,20 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
         child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 48.0,
-          child: Image.asset('assets/flutter-icon.png'),
+          radius: 120.0,
+          backgroundColor: Colors.white,
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 100.0,
+            child: Image.asset('assets/ecell.jpeg'),
+          ),
         ),
       ),
     );
   }
-
   Widget showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -202,7 +209,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
-
   Widget showPasswordInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
@@ -221,7 +227,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
-
   Widget showSecondaryButton() {
     return new FlatButton(
         child: new Text(
@@ -229,7 +234,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
         onPressed: toggleFormMode);
   }
-
   Widget showPrimaryButton() {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
@@ -245,5 +249,30 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             onPressed: validateAndSubmit,
           ),
         ));
+  }
+  Future<bool> _onBackPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Are you sure?'),
+          content: Text('Do you want to exit the App'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            FlatButton(
+              child: Text('Yes'),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            )
+          ],
+        );
+      },
+    ) ?? false;
   }
 }
