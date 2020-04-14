@@ -92,7 +92,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return WillPopScope(
         onWillPop: _onBackPressed,
       child: new Scaffold(
-
           appBar: new AppBar(
             title: new Text('ImageAPI + FirebaseAuth'),
           ),
@@ -107,7 +106,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget _showCircularProgress() {
     if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return buildWaitingScreen();
     }
     return Container(
       height: 0.0,
@@ -274,5 +273,53 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         );
       },
     ) ?? false;
+  }
+
+  Widget buildWaitingScreen() {
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.lightBlue),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 120.0,
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage("assets/ecell.jpeg"),
+                          radius: 100.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
