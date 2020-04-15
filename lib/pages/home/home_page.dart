@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lasttry/pages/ImageAPIView/ImagePage.dart';
+import 'package:lasttry/services/DataPage.dart';
 import 'package:lasttry/services/authentication.dart';
 import 'dart:async';
-import 'package:lasttry/pages/NetConnectivity.dart';
+import 'package:lasttry/services/NetConnectivity.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.logoutCallback})
       : super(key: key);
@@ -27,6 +29,9 @@ class _HomePageState extends State<HomePage> {
   Future navigateToNewPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => NewPage()));
   }
+  Future navigateToImageAPI(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => DataPage()));
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -42,33 +47,43 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           body: Stack(
+
                 children: <Widget>[
-                  FlatButton(child: Text("Check Image API Service",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
-                    onPressed: () {navigateToNewPage(context);},
-                    color: Colors.white,
-                    colorBrightness: Brightness.dark,
-                    disabledColor:Colors.blueGrey,
-                    highlightColor: Colors.red,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 5.0),),
-                  FlatButton(child: Text("POST API Services",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
-                    onPressed: () {navigateToNewPage(context);},
-                    color: Colors.white,
-                    colorBrightness: Brightness.dark,
-                    disabledColor:Colors.blueGrey,
-                    highlightColor: Colors.red,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 5.0),),
-                  FlatButton(
-                    child: Text("Check for Internet Connectivity",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
-                    onPressed: () {navigateToNewPage(context);},
-                    color: Colors.white,
-                    colorBrightness: Brightness.dark,
-                    disabledColor:Colors.blueGrey,
-                    highlightColor: Colors.red,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 5.0),
-                  ),],
+                  Container(
+                    child: Column(
+                      children: <Widget>[
+                        FlatButton(child: Text("Check Image API Service",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
+                          onPressed: () {navigateToImageAPI(context);},
+                          color: Colors.white,
+                          colorBrightness: Brightness.dark,
+                          disabledColor:Colors.blueGrey,
+                          highlightColor: Colors.red,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 5.0),),
+                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),),
+                        FlatButton(child: Text("POST API Services",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
+                          onPressed: () {navigateToNewPage(context);},
+                          color: Colors.white,
+                          colorBrightness: Brightness.dark,
+                          disabledColor:Colors.blueGrey,
+                          highlightColor: Colors.red,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 5.0),),
+                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),),
+                        FlatButton(
+                          child: Text("Check for Internet Connectivity",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
+                          onPressed: () {navigateToNewPage(context);},
+                          color: Colors.white,
+                          colorBrightness: Brightness.dark,
+                          disabledColor:Colors.blueGrey,
+                          highlightColor: Colors.red,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 5.0),
+                        ),
+                      ],
+                    ),
+                    ),
+                  ],
           ),
       ),
       );
