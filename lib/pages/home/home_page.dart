@@ -50,37 +50,31 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Container(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),),
-                        FlatButton(child: Text("Check Image API Service",style: TextStyle(color: Colors.white,fontSize: 20.0),),
-                          onPressed: () {navigateToImageAPI(context);},
-                          color: Colors.lightBlue,
-                          colorBrightness: Brightness.dark,
-                          disabledColor:Colors.blueGrey,
-                          highlightColor: Colors.red,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 5.0),),
-                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),),
-                        FlatButton(child: Text("POST API Services",style: TextStyle(color: Colors.white,fontSize: 20.0),),
-                          onPressed: () {navigateToNewPage(context);},
-                          color: Colors.lightBlue,
-                          colorBrightness: Brightness.dark,
-                          disabledColor:Colors.blueGrey,
-                          highlightColor: Colors.red,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 5.0),),
-                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),),
-                        FlatButton(
-                          child: Text("Check for Internet Connectivity",style: TextStyle(color: Colors.white,fontSize: 20.0),),
-                          onPressed: () {navigateToNewPage(context);},
-                          color: Colors.lightBlue,
-                          colorBrightness: Brightness.dark,
-                          disabledColor:Colors.blueGrey,
-                          highlightColor: Colors.red,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 5.0),
+                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),),
+                        Center(
+                          child: FlatButton(child: Text("Image API Service",style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                              onPressed: () {navigateToImageAPI(context);},
+                              color: Colors.lightBlue,
+                              colorBrightness: Brightness.dark,
+                              disabledColor:Colors.blueGrey,
+                              highlightColor: Colors.red,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 15.0),),
                         ),
-                      ],
+                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),),
+                        FlatButton(
+                          child: Text("Check Internet Connectivity",style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                          onPressed: () {navigateToNewPage(context);},
+                          color: Colors.lightBlue,
+                          colorBrightness: Brightness.dark,
+                          disabledColor:Colors.blueGrey,
+                          highlightColor: Colors.red,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 15.0),
+                        ),
+                        ],
                     ),
                     ),
                   ],

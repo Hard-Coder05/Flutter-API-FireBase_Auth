@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
-import 'package:lasttry/pages/home/home_page.dart';
 import 'package:lasttry/services/post_api_service.dart';
 import 'package:provider/provider.dart';
 import 'SingleImagePage.dart';
@@ -10,7 +9,7 @@ class ImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Image API Result"),
+        title: Text("Image API Result",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: _buildBody(context),
     );
@@ -20,11 +19,13 @@ FutureBuilder<Response> _buildBody(BuildContext context) {
   return FutureBuilder<Response>(
       future: Provider.of<PostApiService>(context).getPosts(),
       builder: (context, snapshot) {
+
         if (snapshot.connectionState == ConnectionState.done) {
           final List posts = json.decode(snapshot.data.bodyString);
           return _buildPosts(context, posts);
         } else {
           return WaitingScreen();
+
         }
       });
 }
@@ -63,7 +64,7 @@ Widget WaitingScreen() {
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(" Please Wait while We Load the Results...... "),
+                  Text(" Please Wait while We Load the Results...... ",style: TextStyle(color: Colors.white),),
                   Padding(padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 30.0),),
                   CircularProgressIndicator(
                     backgroundColor: Colors.white,
@@ -83,6 +84,7 @@ ListView _buildPosts(BuildContext context, List posts) {
     padding: EdgeInsets.all(8),
     itemBuilder: (context, index) {
       return  Card(
+        color: Colors.white,
           elevation: 4,
           child: ListTile(
             title:  Hero(
@@ -92,6 +94,7 @@ ListView _buildPosts(BuildContext context, List posts) {
                 posts[index]['title'],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
             ),
