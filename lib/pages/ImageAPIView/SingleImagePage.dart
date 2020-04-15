@@ -11,7 +11,6 @@ class SingleImagePage extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text("Single Image Indiacator"),
