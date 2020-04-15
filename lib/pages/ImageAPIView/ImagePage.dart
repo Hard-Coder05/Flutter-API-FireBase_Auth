@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
+import 'package:lasttry/pages/home/home_page.dart';
 import 'package:lasttry/services/post_api_service.dart';
 import 'package:provider/provider.dart';
 import 'SingleImagePage.dart';
@@ -10,10 +11,6 @@ class ImagePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Image API Result"),
-        leading: IconButton(
-          icon: Icon(Icons.chevron_left),
-          onPressed: () => Navigator.pop(context, false),
-        ),
       ),
       body: _buildBody(context),
     );
@@ -66,6 +63,8 @@ Widget WaitingScreen() {
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  Text(" Please Wait while We Load the Results...... "),
+                  Padding(padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 30.0),),
                   CircularProgressIndicator(
                     backgroundColor: Colors.white,
                   ),

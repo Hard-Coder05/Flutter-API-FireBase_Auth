@@ -47,23 +47,23 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           body: Stack(
-
                 children: <Widget>[
                   Container(
                     child: Column(
                       children: <Widget>[
-                        FlatButton(child: Text("Check Image API Service",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
+                        Padding(padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),),
+                        FlatButton(child: Text("Check Image API Service",style: TextStyle(color: Colors.white,fontSize: 20.0),),
                           onPressed: () {navigateToImageAPI(context);},
-                          color: Colors.white,
+                          color: Colors.lightBlue,
                           colorBrightness: Brightness.dark,
                           disabledColor:Colors.blueGrey,
                           highlightColor: Colors.red,
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 5.0),),
                         Padding(padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),),
-                        FlatButton(child: Text("POST API Services",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
+                        FlatButton(child: Text("POST API Services",style: TextStyle(color: Colors.white,fontSize: 20.0),),
                           onPressed: () {navigateToNewPage(context);},
-                          color: Colors.white,
+                          color: Colors.lightBlue,
                           colorBrightness: Brightness.dark,
                           disabledColor:Colors.blueGrey,
                           highlightColor: Colors.red,
@@ -71,9 +71,9 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 8.0, vertical: 5.0),),
                         Padding(padding: const EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),),
                         FlatButton(
-                          child: Text("Check for Internet Connectivity",style: TextStyle(color: Colors.lightBlue,fontSize: 20.0),),
+                          child: Text("Check for Internet Connectivity",style: TextStyle(color: Colors.white,fontSize: 20.0),),
                           onPressed: () {navigateToNewPage(context);},
-                          color: Colors.white,
+                          color: Colors.lightBlue,
                           colorBrightness: Brightness.dark,
                           disabledColor:Colors.blueGrey,
                           highlightColor: Colors.red,

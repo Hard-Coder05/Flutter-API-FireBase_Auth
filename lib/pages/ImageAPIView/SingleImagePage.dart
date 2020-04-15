@@ -93,6 +93,8 @@ class SingleImagePage extends StatelessWidget {
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Text(" Please Wait while We Load the Results...... "),
+                    Padding(padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 30.0),),
                     CircularProgressIndicator(
                       backgroundColor: Colors.white,
                     ),
