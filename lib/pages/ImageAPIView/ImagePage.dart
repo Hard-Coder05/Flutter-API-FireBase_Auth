@@ -19,7 +19,6 @@ FutureBuilder<Response> _buildBody(BuildContext context) {
   return FutureBuilder<Response>(
       future: Provider.of<PostApiService>(context).getPosts(),
       builder: (context, snapshot) {
-
         if (snapshot.connectionState == ConnectionState.done) {
           final List posts = json.decode(snapshot.data.bodyString);
           return _buildPosts(context, posts);

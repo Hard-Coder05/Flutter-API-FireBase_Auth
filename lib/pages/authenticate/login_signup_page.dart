@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:lasttry/services/authentication.dart';
-
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
-
   final BaseAuth auth;
   final VoidCallback loginCallback;
-
   @override
   State<StatefulWidget> createState() => new _LoginSignupPageState();
 }
-
 class _LoginSignupPageState extends State<LoginSignupPage> {
   final _formKey = new GlobalKey<FormState>();
-
   String _email;
   String _password;
   String _errorMessage;
-
     bool _isLoginForm;
   bool _isLoading;
-
-  // Check if form is valid before perform login or signup
+  bool _passwordVisible;
+  String _data;
   bool validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -30,8 +24,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     }
     return false;
   }
-
-  // Perform login or signup
   void validateAndSubmit() async {
     setState(() {
       _errorMessage = "";
@@ -45,14 +37,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           print('Signed in: $userId');
         } else {
           userId = await widget.auth.signUp(_email, _password);
-          //widget.auth.sendEmailVerification();
-          //_showVerifyEmailSentDialog();
           print('Signed up user: $userId');
+          _isLoginForm=!_isLoginForm;
         }
         setState(() {
           _isLoading = false;
         });
-
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback();
         }
@@ -66,34 +56,37 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       }
     }
   }
-
   @override
   void initState() {
+    _passwordVisible = false;
     _errorMessage = "";
     _isLoading = false;
     _isLoginForm = true;
     super.initState();
   }
-
   void resetForm() {
     _formKey.currentState.reset();
     _errorMessage = "";
   }
-
   void toggleFormMode() {
     resetForm();
     setState(() {
       _isLoginForm = !_isLoginForm;
     });
   }
-
   @override
   Widget build(BuildContext context) {
+    if(_isLoginForm){
+      _data = "Login Form";
+    }
+    else{
+      _data = "Registration Form";
+    }
     return WillPopScope(
         onWillPop: _onBackPressed,
       child: new Scaffold(
           appBar: new AppBar(
-            title: new Text('ImageAPI + FirebaseAuth'),
+            title: new Text(_data,style: TextStyle(color: Colors.white),),
           ),
           body: Stack(
             children: <Widget>[
@@ -103,7 +96,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           )),
     );
   }
-
   Widget _showCircularProgress() {
     if (_isLoading) {
       return buildWaitingScreen();
@@ -113,30 +105,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       width: 0.0,
     );
   }
-
-//  void _showVerifyEmailSentDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content:
-//              new Text("Link to verify account has been sent to your email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                toggleFormMode();
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
-
   Widget _showForm() {
     return new Container(
         padding: EdgeInsets.all(16.0),
@@ -155,7 +123,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           ),
         ));
   }
-
   Widget showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return new Text(
@@ -172,7 +139,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       );
     }
   }
-
   Widget showLogo() {
     return new Hero(
       tag: 'hero',
@@ -190,10 +156,20 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
+  var _emailController = TextEditingController();
+  var _pwdController = TextEditingController();
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _pwdFocus = FocusNode();
   Widget showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
       child: new TextFormField(
+        controller: _emailController,
+        textInputAction: TextInputAction.next,
+        onFieldSubmitted: (term){
+          _fieldFocusChange(context, _emailFocus, _pwdFocus);
+        },
+        focusNode: _emailFocus,
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
@@ -212,19 +188,43 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
+        textInputAction: TextInputAction.done,
+        focusNode: _pwdFocus,
+        onFieldSubmitted: (value){
+          _pwdFocus.unfocus();
+          validateAndSubmit();
+        },
         maxLines: 1,
-        obscureText: true,
+        obscureText: _passwordVisible,
         autofocus: false,
         decoration: new InputDecoration(
             hintText: 'Password',
             icon: new Icon(
               Icons.lock,
               color: Colors.grey,
-            )),
+            ),
+          suffixIcon: IconButton(
+        icon: Icon(
+        _passwordVisible
+        ? Icons.visibility
+          : Icons.visibility_off,
+          color: Colors.grey,
+        ),
+        onPressed: () {
+          setState(() {
+            _passwordVisible = !_passwordVisible;
+          });
+        },
+      ),
+        ),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
+  }
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
   }
   Widget showSecondaryButton() {
     return new FlatButton(
@@ -274,7 +274,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       },
     ) ?? false;
   }
-
   Widget buildWaitingScreen() {
     return Scaffold(
       body: Stack(
