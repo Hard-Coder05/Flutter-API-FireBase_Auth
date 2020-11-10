@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "6244554896",
+    "firebase_url": "https://flutterfacedetection-40d78.firebaseio.com",
+    "project_id": "flutterfacedetection-40d78",
+    "storage_bucket": "flutterfacedetection-40d78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6244554896:android:ff30d47440d2ceb9aea015",
+        "android_client_info": {
+          "package_name": "com.hardcoder05.flutterfacedetection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6244554896-paipjhhgbo4arph603lb64bsrtkn9h4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfihugKTUWlT8wwRWMCz0SILRXd1d1BC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6244554896-paipjhhgbo4arph603lb64bsrtkn9h4o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
